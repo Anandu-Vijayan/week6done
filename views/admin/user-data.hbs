@@ -1,0 +1,49 @@
+
+
+
+
+<section>
+
+<div class="container">
+    <div class="row ">
+       <a  class="btn btn-success " style="width: 120px; margin-top: 15px; margin-left: auto;" href="/admin/logoutAdmin">Logout</a>
+     </div>
+
+
+<table class="table" id="usersTable">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email </th>
+      <th scope="col">Password</th>
+      <th scope="col">Options </th>
+      
+    </tr>
+  </thead>
+  <tbody>
+   {{#each users}}
+
+
+    <tr>
+       <th scope="row">{{@index }}</th>
+       <td>{{this.username}}</td>
+       <td>{{this.email}}</td>
+       <td>{{this.password}}</td>
+         <td>   <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary" >Edit</a></td>
+       <td>   <a href="/admin/delete-user/{{this._id}}" onclick="return confirm('confirm delete')" class="btn btn-danger" >Delete</a></td>
+      
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+</div>
+
+</section>
+
+
+<script>
+  $(document).ready(() =>{
+    $('#usersTable').DataTable();
+} );
+</script>

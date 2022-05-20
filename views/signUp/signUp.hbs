@@ -1,0 +1,134 @@
+
+
+    <div id="login">
+        <h3 class="text-center text-white pt-5"></h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="/signup" method="post">
+                            <h3 class="text-center text-info">Register</h3>
+                                <div style="height: 30px;"> 
+                                    {{#if signupError}}
+                                    <h5 class="text-danger" style="text-align:center ;">   {{signupError}}</h5>
+                                    {{/if}}
+                                     </div>
+
+                            <div class="form-group mt-3">
+                                <label for="email"  class="text-info">Email:</label><br>
+                                <input type="email" name="email" id="emailId" onkeyup="validEmail()" class="form-control">
+                              <span id="emailerr" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label id="names" for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username"  onkeyup="validateName()" class="form-control">
+                                   <span id="nameerr" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="Password" class="text-info">Create password:</label><br>
+                                <input type="password" name="password" id="password"     onkeyup="validPassowrd()"  class="form-control">
+                                    <span id="passworderr" class="text-danger"></span>
+                            </div>
+                             <div class="form-group mt-3">
+                                <label for="password" class="text-info" >Re-enter password: </label><br>
+                                <input type="password"  name="confirm_password"    onkeyup="validConfirmPassowrd()"  id="cnfPassword" class="form-control">
+                                  <span id="cnfPassworderr" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <input  type="submit"   onclick="return validation()" name="submit" class="btn btn-info btn-md mt-3" value="Register">
+                            </div>
+                            <div id="register-link" class="text-right mt-3">
+                                <a href="/login"  class="text-info">Already a user? Login here</a>
+                            </div>
+                        </form>
+                
+                        
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var errorName = document.getElementById('nameerr')
+    var errorEmail = document.getElementById('emailerr')
+    var errorPassword = document.getElementById('passworderr')
+     var errorCnfPassword = document.getElementById('cnfPassworderr')
+
+       function validEmail() {
+        const name = document.getElementById('emailId').value
+        if (name == "") {
+            errorEmail.innerHTML = "enter you email address"
+            return false
+
+
+        }
+        if (!name.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            errorEmail.innerHTML = 'enter a proper email adress'
+            return false
+        }
+
+        errorEmail.innerHTML = null
+        return true
+    }
+    function validateName() {
+    
+        const name = document.getElementById('username').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z]*$/)) {
+            errorName.innerHTML = 'Numbers and symbols are not allowed'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+
+    }
+ 
+
+    function validPassowrd() {
+        const name = document.getElementById('password').value
+        if (name == "") {
+            errorPassword.innerHTML = "enter a password"
+            return false
+        }
+        if (name.length < 3) {
+            errorPassword.innerHTML = "password should be more than three characters"
+            return false
+        }
+        errorPassword.innerHTML = null
+        return true
+    }
+      function validConfirmPassowrd() {
+        const name = document.getElementById('cnfPassword').value
+         const cnfname = document.getElementById('password').value
+        if (name == "") {
+            errorCnfPassword.innerHTML = "re-enter  password"
+            return false
+        }
+        if (name.length < 3) {
+            errorCnfPassword.innerHTML = "password should be more than three characters"
+            return false
+        }
+        if( name!=cnfname){
+               errorCnfPassword.innerHTML = "password doesnt  match"
+                 return false
+        }
+        errorCnfPassword.innerHTML = null
+        return true
+    }
+
+
+    function validation() {
+        if (   !validEmail() &&!validateName() && !validPassowrd() &&!validConfirmPassowrd()   ) {
+            return false
+        }else if( !validEmail() ||!validateName() || !validPassowrd()||!validConfirmPassowrd()   ){
+           return false
+        }else{   return true}
+
+    }
+</script>
